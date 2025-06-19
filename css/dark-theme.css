@@ -1,0 +1,643 @@
+/* Configuración de Tailwind para modo oscuro */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables CSS para temas */
+:root {
+  --primary: #3b82f6;
+  --secondary: #1e40af;
+  --accent: #f59e0b;
+}
+
+/* Modo oscuro */
+.dark {
+  color-scheme: dark;
+}
+
+/* Estilos personalizados para modo oscuro */
+.dark body {
+  @apply bg-gray-900 text-white;
+}
+
+.dark .bg-gray-50 {
+  @apply bg-gray-900;
+}
+
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+.dark .text-gray-900 {
+  @apply text-white;
+}
+
+.dark .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark .text-gray-600 {
+  @apply text-gray-400;
+}
+
+.dark .border-gray-200 {
+  @apply border-gray-700;
+}
+
+.dark .border-gray-300 {
+  @apply border-gray-600;
+}
+
+/* Navbar en modo oscuro */
+.dark nav {
+  @apply bg-gray-800/90 backdrop-blur-lg border-gray-700;
+}
+
+/* Cards en modo oscuro con glassmorphism */
+.dark .shadow-lg {
+  @apply shadow-2xl;
+}
+
+.dark .bg-white\/80 {
+  @apply bg-gray-800/80;
+}
+
+.dark .backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Inputs en modo oscuro */
+.dark input,
+.dark select,
+.dark textarea {
+  @apply bg-gray-700/50 border-gray-600 text-white placeholder-gray-400;
+  backdrop-filter: blur(8px);
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  @apply border-primary ring-primary/50 bg-gray-700/70;
+}
+
+/* Botones en modo oscuro */
+.dark .bg-gray-200 {
+  @apply bg-gray-600/50;
+  backdrop-filter: blur(8px);
+}
+
+.dark .bg-gray-200:hover {
+  @apply bg-gray-500/60;
+}
+
+/* Footer en modo oscuro */
+.dark footer {
+  @apply bg-gray-900/95;
+  backdrop-filter: blur(16px);
+}
+
+/* Glassmorphism para cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-card {
+  background: rgba(17, 24, 39, 0.3);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+/* Transiciones suaves para el cambio de tema */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Estilos para productos sin stock */
+.out-of-stock {
+  @apply opacity-75 grayscale;
+}
+
+.out-of-stock img {
+  @apply grayscale;
+}
+
+/* Indicadores de stock mejorados */
+.stock-indicator {
+  @apply absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-bold shadow-lg;
+  backdrop-filter: blur(8px);
+}
+
+.stock-low {
+  @apply bg-yellow-500/90 text-white border border-yellow-400/50;
+}
+
+.stock-out {
+  @apply bg-red-500/90 text-white border border-red-400/50;
+}
+
+.stock-available {
+  @apply bg-green-500/90 text-white border border-green-400/50;
+}
+
+/* Animaciones para categorías mejoradas */
+.category-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
+}
+
+.category-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.category-card:active {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Responsive para categorías */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .category-card {
+    padding: 1rem;
+  }
+
+  .category-card i {
+    font-size: 1.5rem;
+  }
+
+  .category-card h3 {
+    font-size: 0.875rem;
+  }
+}
+
+/* Carrusel mejorado */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .carousel-slide {
+    min-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-slide {
+    min-width: 25%;
+  }
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.carousel-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dark .carousel-button {
+  background: rgba(17, 24, 39, 0.9);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.dark .carousel-button:hover {
+  background: rgba(17, 24, 39, 1);
+}
+
+.carousel-button.prev {
+  left: 16px;
+}
+
+.carousel-button.next {
+  right: 16px;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(209, 213, 219, 0.6);
+}
+
+.carousel-indicator.active {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.carousel-indicator:hover {
+  transform: scale(1.1);
+}
+
+/* Mascota animada */
+.mascot {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.mascot:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.mascot-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 16px;
+  border-radius: 16px;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+.dark .mascot-bubble {
+  background: rgba(17, 24, 39, 0.95);
+  color: #f3f4f6;
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.mascot-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .mascot-bubble::after {
+  border-top-color: rgba(17, 24, 39, 0.95);
+}
+
+/* Cursor personalizado */
+.custom-cursor {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 16px;
+  transition: all 0.1s ease;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor.cursor-hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+}
+
+/* Animaciones de scroll */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Slogan animado */
+.animated-slogan {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading spinner personalizado */
+.loading-spinner {
+  border: 3px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid #3b82f6;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toast notifications mejoradas */
+.toast {
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+}
+
+/* Mejoras para el carrito */
+.cart-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para productos destacados */
+.featured-badge {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  animation: pulse 2s infinite;
+}
+
+/* Mejoras para la página de producto */
+.product-gallery img {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Estilos para reseñas */
+.review-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .review-card {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mejoras de accesibilidad */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-primary/50 ring-offset-2;
+}
+
+/* Estilos para badges de marca */
+.brand-badge {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Mejoras para el hero section */
+.hero-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #7c3aed 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+}
+
+/* Estilos para indicadores de precio */
+.price-highlight {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.price-original {
+  @apply text-lg text-gray-500 line-through;
+}
+
+.price-discount {
+  @apply text-sm bg-red-500 text-white px-2 py-1 rounded-full;
+}
+
+/* Efectos de partículas para el hero */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float-particles 6s infinite linear;
+}
+
+@keyframes float-particles {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive mejoras */
+@media (max-width: 640px) {
+  .carousel-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-button.prev {
+    left: 8px;
+  }
+
+  .carousel-button.next {
+    right: 8px;
+  }
+
+  .mascot {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    bottom: 16px;
+    left: 16px;
+  }
+
+  .custom-cursor {
+    display: none;
+  }
+}
+
+/* Estilos para el modal FAQ */
+.faq-item {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-question {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-question:hover {
+  transform: translateX(4px);
+}
+
+.faq-answer {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-answer p {
+  margin-bottom: 8px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.faq-answer p::before {
+  content: "•";
+  color: #3b82f6;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Animación para el modal */
+#faq-modal {
+  backdrop-filter: blur(8px);
+}
+
+#faq-modal > div {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mejoras para el carrusel en móviles */
+@media (max-width: 640px) {
+  .carousel-slide {
+    scroll-snap-align: center;
+  }
+
+  .carousel-track {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+}
