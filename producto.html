@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiendaOnline - Producto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <i class="fas fa-store mr-2"></i>TiendaOnline
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Inicio</a>
+                        <a href="productos.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Productos</a>
+                        <a href="index.html#categorias" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Categorías</a>
+                        <a href="index.html#contacto" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Contacto</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="text-gray-700 dark:text-gray-300 hover:text-primary transition-all duration-300 transform hover:scale-110 p-2 rounded-lg hover:bg-primary/10">
+                        <i id="theme-icon" class="fas fa-moon text-xl"></i>
+                    </button>
+                    
+                    <a href="carrito.html" class="relative text-gray-700 dark:text-gray-300 hover:text-primary transition">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                    
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-700 dark:text-gray-300 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="pt-16 bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li><a href="index.html" class="text-gray-500 hover:text-primary">Inicio</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-400 text-sm"></i></li>
+                    <li><a href="productos.html" class="text-gray-500 hover:text-primary">Productos</a></li>
+                    <li><i class="fas fa-chevron-right text-gray-400 text-sm"></i></li>
+                    <li id="breadcrumb-product" class="text-gray-900 font-medium">Producto</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Product Detail -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="product-detail" class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Product Images -->
+            <div>
+                <div class="mb-4">
+                    <img id="main-image" src="/placeholder.svg?height=500&width=500" alt="Producto" class="w-full h-96 object-cover rounded-lg shadow-lg">
+                </div>
+                <div id="thumbnail-images" class="grid grid-cols-4 gap-2">
+                    <!-- Thumbnails se cargarán dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div>
+                <h1 id="product-name" class="text-3xl font-bold text-gray-900 mb-4">Nombre del Producto</h1>
+                <div class="flex items-center mb-4">
+                    <div class="flex text-yellow-400 mr-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-gray-600">(24 reseñas)</span>
+                </div>
+                
+                <div class="mb-6">
+                    <span id="product-price" class="text-4xl font-bold text-primary">$0</span>
+                    <span class="text-gray-500 ml-2">IVA incluido</span>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Descripción</h3>
+                    <p id="product-description" class="text-gray-600 leading-relaxed">Descripción del producto...</p>
+                </div>
+                
+                <!-- Specifications -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Especificaciones</h3>
+                    <div id="product-specs" class="bg-gray-50 p-4 rounded-lg">
+                        <!-- Specs se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <!-- Quantity and Add to Cart -->
+                <div class="mb-6">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <label class="text-sm font-medium text-gray-700">Cantidad:</label>
+                        <div class="flex items-center border border-gray-300 rounded-md">
+                            <button id="decrease-qty" class="px-3 py-2 text-gray-600 hover:text-gray-800">-</button>
+                            <input type="number" id="quantity" value="1" min="1" class="w-16 text-center border-0 focus:outline-none">
+                            <button id="increase-qty" class="px-3 py-2 text-gray-600 hover:text-gray-800">+</button>
+                        </div>
+                    </div>
+                    
+                    <button id="add-to-cart-btn" class="w-full bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition transform hover:scale-105 mb-3">
+                        <i class="fas fa-shopping-cart mr-2"></i>Agregar al Carrito
+                    </button>
+                    
+                    <button id="buy-now-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition">
+                        <i class="fab fa-whatsapp mr-2"></i>Comprar Ahora por WhatsApp
+                    </button>
+                </div>
+                
+                <!-- Product Features -->
+                <div class="border-t pt-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-shipping-fast text-2xl text-primary mb-2"></i>
+                            <span class="text-sm text-gray-600">Envío Gratis</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-undo text-2xl text-primary mb-2"></i>
+                            <span class="text-sm text-gray-600">30 días devolución</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-shield-alt text-2xl text-primary mb-2"></i>
+                            <span class="text-sm text-gray-600">Garantía oficial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Reviews -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8">Reseñas de Clientes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">hace 2 días</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Excelente producto, justo lo que esperaba. La calidad es muy buena y llegó súper rápido."</p>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm mr-3">C</div>
+                        <span class="font-medium">Carlos M.</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">hace 1 semana</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Muy recomendado. El producto cumple con todas las expectativas y el servicio al cliente es excelente."</p>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm mr-3">L</div>
+                        <span class="font-medium">Laura S.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8">Productos Relacionados</h2>
+            <div id="related-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Related products se cargarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5491125068477?text=Hola, tengo una consulta sobre la tienda" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform z-50">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="toast-message">Producto agregado al carrito</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/producto.js"></script>
+</body>
+</html>

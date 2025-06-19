@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroShop - Productos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed w-full top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <i class="fas fa-bolt mr-2"></i>ElectroShop
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md transition">Inicio</a>
+                        <a href="productos.html" class="text-primary font-medium px-3 py-2 rounded-md">Productos</a>
+                        <a href="index.html#categorias" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md transition">Categorías</a>
+                        <a href="index.html#contacto" class="text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md transition">Contacto</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="text-gray-700 dark:text-gray-300 hover:text-primary transition-all duration-300 transform hover:scale-110 p-2 rounded-lg hover:bg-primary/10">
+                        <i id="theme-icon" class="fas fa-moon text-xl"></i>
+                    </button>
+                    
+                    <a href="carrito.html" class="relative text-gray-700 dark:text-gray-300 hover:text-primary transition">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                    
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-700 dark:text-gray-300 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md transition">Inicio</a>
+                <a href="productos.html" class="block text-primary font-medium px-3 py-2 rounded-md">Productos</a>
+                <a href="index.html#categorias" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md transition">Categorías</a>
+                <a href="index.html#contacto" class="block text-gray-700 dark:text-gray-300 hover:text-primary px-3 py-2 rounded-md transition">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Nuestros Productos</h1>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">Encuentra exactamente lo que buscas</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Filters - SOLO EN DESKTOP -->
+                <div class="hidden lg:block lg:w-1/4">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg sticky top-24 transition-colors duration-300">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Filtros</h3>
+                        
+                        <!-- Search -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Buscar</label>
+                            <input type="text" id="search-input" placeholder="Buscar productos..." class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        </div>
+                        
+                        <!-- Category Filter -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Categoría</label>
+                            <select id="category-filter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                                <option value="">Todas las categorías</option>
+                                <option value="computadoras">Computadoras</option>
+                                <option value="celulares">Celulares</option>
+                                <option value="heladeras">Heladeras</option>
+                                <option value="lavarropas">Lavarropas</option>
+                                <option value="cafeteras">Cafeteras</option>
+                                <option value="televisores">Televisores</option>
+                                <option value="aires">Aires Acondicionados</option>
+                                <option value="microondas">Microondas</option>
+                                <option value="aspiradoras">Aspiradoras</option>
+                                <option value="parlantes">Parlantes</option>
+                            </select>
+                        </div>
+
+                        <!-- Brand Filter -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Marca</label>
+                            <select id="brand-filter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                                <option value="">Todas las marcas</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Price Range -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rango de Precio</label>
+                            <div class="flex space-x-2">
+                                <input type="number" id="min-price" placeholder="Mín" class="w-1/2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                                <input type="number" id="max-price" placeholder="Máx" class="w-1/2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                            </div>
+                        </div>
+
+                        <!-- Stock Filter -->
+                        <div class="mb-6">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="stock-filter" class="mr-2">
+                                <span class="text-sm text-gray-700 dark:text-gray-300">Solo productos en stock</span>
+                            </label>
+                        </div>
+                        
+                        <!-- Sort -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ordenar por</label>
+                            <select id="sort-filter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                                <option value="name">Nombre</option>
+                                <option value="price-low">Precio: Menor a Mayor</option>
+                                <option value="price-high">Precio: Mayor a Menor</option>
+                            </select>
+                        </div>
+                        
+                        <button id="clear-filters" class="w-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-medium py-2 px-4 rounded-md transition">
+                            Limpiar Filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="w-full lg:w-3/4">
+                    <div class="flex justify-between items-center mb-6">
+                        <p id="results-count" class="text-gray-600 dark:text-gray-400">Mostrando todos los productos</p>
+                        <button id="mobile-filter-btn" class="lg:hidden bg-primary text-white px-4 py-2 rounded-md transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-filter mr-2"></i>Filtros
+                        </button>
+                    </div>
+                    
+                    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Los productos se cargarán dinámicamente -->
+                    </div>
+                    
+                    <!-- Loading -->
+                    <div id="loading" class="hidden text-center py-8">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">Cargando productos...</p>
+                    </div>
+                    
+                    <!-- No Results -->
+                    <div id="no-results" class="hidden text-center py-12">
+                        <i class="fas fa-search text-4xl text-gray-400 dark:text-gray-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-600 dark:text-gray-400 mb-2">No se encontraron productos</h3>
+                        <p class="text-gray-500 dark:text-gray-500">Intenta ajustar tus filtros de búsqueda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mascota Robot -->
+    <div id="mascot" class="mascot">
+        🤖
+        <div id="mascot-bubble" class="mascot-bubble hidden">
+            <span id="mascot-text">¡Hola! ¿Te ayudo?</span>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5491125068477?text=Hola, tengo una consulta sobre la tienda" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Mobile Filter Modal -->
+    <div id="mobile-filter-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden lg:hidden">
+        <div class="fixed inset-y-0 left-0 w-80 bg-white dark:bg-gray-800 shadow-xl transform -translate-x-full transition-transform" id="mobile-filter-panel">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Filtros</h3>
+                    <button id="close-mobile-filter" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <!-- Same filters as desktop -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Buscar</label>
+                        <input type="text" id="mobile-search-input" placeholder="Buscar productos..." class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Categoría</label>
+                        <select id="mobile-category-filter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <option value="">Todas las categorías</option>
+                            <option value="computadoras">Computadoras</option>
+                            <option value="celulares">Celulares</option>
+                            <option value="heladeras">Heladeras</option>
+                            <option value="lavarropas">Lavarropas</option>
+                            <option value="cafeteras">Cafeteras</option>
+                            <option value="televisores">Televisores</option>
+                            <option value="aires">Aires Acondicionados</option>
+                            <option value="microondas">Microondas</option>
+                            <option value="aspiradoras">Aspiradoras</option>
+                            <option value="parlantes">Parlantes</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Marca</label>
+                        <select id="mobile-brand-filter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <option value="">Todas las marcas</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rango de Precio</label>
+                        <div class="flex space-x-2">
+                            <input type="number" id="mobile-min-price" placeholder="Mín" class="w-1/2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <input type="number" id="mobile-max-price" placeholder="Máx" class="w-1/2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="mobile-stock-filter" class="mr-2">
+                            <span class="text-sm text-gray-700 dark:text-gray-300">Solo productos en stock</span>
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Ordenar por</label>
+                        <select id="mobile-sort-filter" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <option value="name">Nombre</option>
+                            <option value="price-low">Precio: Menor a Mayor</option>
+                            <option value="price-high">Precio: Mayor a Menor</option>
+                        </select>
+                    </div>
+                    
+                    <button id="mobile-clear-filters" class="w-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-medium py-2 px-4 rounded-md transition">
+                        Limpiar Filtros
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/productos.js"></script>
+</body>
+</html>

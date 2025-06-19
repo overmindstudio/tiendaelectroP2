@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiendaOnline - Carrito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <i class="fas fa-store mr-2"></i>TiendaOnline
+                    </a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Inicio</a>
+                        <a href="productos.html" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Productos</a>
+                        <a href="index.html#categorias" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Categorías</a>
+                        <a href="index.html#contacto" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md transition">Contacto</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="carrito.html" class="relative text-primary font-medium">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                    
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Carrito de Compras</h1>
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-2">
+                        <li><a href="index.html" class="text-gray-500 hover:text-primary">Inicio</a></li>
+                        <li><i class="fas fa-chevron-right text-gray-400 text-sm"></i></li>
+                        <li class="text-gray-900 font-medium">Carrito</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Cart Items -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div id="cart-items">
+                            <!-- Cart items se cargarán dinámicamente -->
+                        </div>
+                        
+                        <!-- Empty Cart -->
+                        <div id="empty-cart" class="text-center py-12 hidden">
+                            <i class="fas fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-600 mb-2">Tu carrito está vacío</h3>
+                            <p class="text-gray-500 mb-6">¡Agrega algunos productos para comenzar!</p>
+                            <a href="productos.html" class="bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition">
+                                Ver Productos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                        <h3 class="text-xl font-semibold mb-4">Resumen del Pedido</h3>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Subtotal:</span>
+                                <span id="subtotal">$0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Envío:</span>
+                                <span id="shipping">Gratis</span>
+                            </div>
+                            <div class="border-t pt-3">
+                                <div class="flex justify-between text-lg font-semibold">
+                                    <span>Total:</span>
+                                    <span id="total" class="text-primary">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <button id="checkout-whatsapp" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition transform hover:scale-105">
+                                <i class="fab fa-whatsapp mr-2"></i>Finalizar por WhatsApp
+                            </button>
+                            
+                            <a href="productos.html" class="block w-full text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-6 rounded-lg transition">
+                                Seguir Comprando
+                            </a>
+                        </div>
+                        
+                        <!-- Shipping Info -->
+                        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-semibold text-blue-900 mb-2">Información de Envío</h4>
+                            <ul class="text-sm text-blue-800 space-y-1">
+                                <li><i class="fas fa-check mr-2"></i>Envío gratis en compras +$15.000</li>
+                                <li><i class="fas fa-check mr-2"></i>Entrega en 24-48hs</li>
+                                <li><i class="fas fa-check mr-2"></i>Cobertura en todo el país</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5491125068477?text=Hola, tengo una consulta sobre la tienda" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110 z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform z-50">
+        <i class="fas fa-trash mr-2"></i>
+        <span id="toast-message">Producto eliminado del carrito</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carrito.js"></script>
+</body>
+</html>
